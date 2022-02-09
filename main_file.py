@@ -76,7 +76,7 @@ class SimpleModel(nn.Module):
 
 model = SimpleModel(emb_szs, conts.shape[1],1,[200,100], p=0.4)
 criterion = nn.MSELoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 
 #sort test and train data for categorical and continous data
 batch_size = 1600
@@ -102,7 +102,7 @@ for i in range(epochs):
   y_pred = model(cat_train, con_train)
   loss = torch.sqrt(criterion(y_pred, y_train))
   losses.append(loss)
-  print(f"Eponch: {i},  Loss={loss}")
+  print(f"Epoch: {i},  Loss={loss}")
   optimizer.zero_grad()
   loss.backward()
   optimizer.step()
