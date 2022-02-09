@@ -73,3 +73,36 @@ class SimpleModel(nn.Module):
     x = torch.cat([x,x_cont],1)
     x = self.layers(x)
     return x
+
+model = SimpleModel(emb_szs, conts.shape[1],1,[200,100], p=0.4)
+criterion = nn.MSELoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+#sort test and train data for categorical and continous data
+batch_size = 1600
+test_size = int(batch_size*0.2)
+cat_train = cats[:batch_size-test_size]
+cat_test = cats[batch_size-test_size:batch_size]
+con_train = conts[:batch_size-test_size]
+con_test = conts[batch_size-test_size:batch_size]
+y_train = y[:batch_size-test_size]
+y_test = y[batch_size-test_size:batch_size]
+
+
+#moving all data to cude to avoid device conflicts
+cat_train = cat_train.to('cuda')
+con_train = con_train.to('cuda')
+model = model.to('cuda')
+y_train = y_train.to('cuda')
+
+epochs = 50
+losses = []
+for i in range(epochs):
+  i+=1
+  y_pred = model(cat_train, con_train)
+  loss = torch.sqrt(criterion(y_pred, y_train))
+  losses.append(loss)
+  print(f"Epoch: {i},  Loss={loss}")
+  optimizer.zero_grad()
+  loss.backward()
+  optimizer.step()
