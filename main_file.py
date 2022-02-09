@@ -1,6 +1,5 @@
 import torch
 import numpy as np
-import matplotlib.pyplot as plt
 import torch.nn as nn
 import pandas as pd
 import torch.nn.functional as F
@@ -8,7 +7,7 @@ from haversine import haversine_distance
 import ivy
 import sys
 sys.setrecursionlimit(10000)
-#%matplotlib inline
+
 ivy.set_framework('torch')
 cuda = torch.device('cuda')
 df = pd.read_csv("NYCTaxiFares.csv")

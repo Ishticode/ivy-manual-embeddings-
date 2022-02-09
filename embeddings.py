@@ -1,3 +1,8 @@
+import ivy
+from torch import nn
+
+ivy.set_framework('torch')
+
 def embedding(vectorInput,embedding_matrix):
   if len(vectorInput)==1:
       return embedding_matrix[vectorInput[0]]
