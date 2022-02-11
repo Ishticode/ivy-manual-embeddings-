@@ -88,7 +88,7 @@ y_train = y[:batch_size-test_size]
 y_test = y[batch_size-test_size:batch_size]
 
 
-#moving all data to cude to avoid device conflicts
+#moving all data to same device to avoid device conflicts
 cat_train = cat_train.to(device)
 cat_test = cat_test.to(device)
 con_train = con_train.to(device)
