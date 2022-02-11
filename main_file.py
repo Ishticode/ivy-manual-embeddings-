@@ -10,7 +10,7 @@ import sys
 sys.setrecursionlimit(10000)
 #%matplotlib inline
 ivy.set_framework('torch')
-device = "cuda" if torh.cuda.is_available() else "cpu"
+device = "cuda" if torch.cuda.is_available() else "cpu"
 df = pd.read_csv("NYCTaxiFares.csv")
 
 #haversine_distance function takes dataframe and its corresponding columns as input
