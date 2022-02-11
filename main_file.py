@@ -9,7 +9,7 @@ import sys
 sys.setrecursionlimit(10000)
 
 ivy.set_framework('torch')
-cuda = torch.device('cuda')
+device = "cuda" if torch.cuda.is_available() else "cpu"
 df = pd.read_csv("NYCTaxiFares.csv")
 
 #haversine_distance function takes dataframe and its corresponding columns as input
@@ -89,10 +89,13 @@ y_test = y[batch_size-test_size:batch_size]
 
 
 #moving all data to cude to avoid device conflicts
-cat_train = cat_train.to('cuda')
-con_train = con_train.to('cuda')
-model = model.to('cuda')
-y_train = y_train.to('cuda')
+cat_train = cat_train.to(device)
+cat_test = cat_test.to(device)
+con_train = con_train.to(device)
+con_test = con_test.to(device)
+model = model.to(device)
+y_train = y_train.to(device)
+y_test = y_test.to(device)
 
 epochs = 50
 losses = []
