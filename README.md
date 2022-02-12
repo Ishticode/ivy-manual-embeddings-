@@ -1,5 +1,5 @@
 # ivy-manual-embeddings
-Note: This is not how embedding functionality would be implemented into the actual ivy lib.
+Note: This is not how embedding functionality would be implemented into the actual ivy lib. That has been done in embedding_layer_proto or embedding_frozen branch in my ivy repository (forked from unifyai/ivy)
 
 
 Some embedding layer implementation using ivy library. Just for fun. It is based on [NYCTaxiFare dataset](https://www.kaggle.com/tanyildizderya/nyctaxifares) from kaggle (cut down to 120,000 rows). Most of the feature extraction is similar to Jose Portilla's.
